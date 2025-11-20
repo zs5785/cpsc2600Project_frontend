@@ -1,0 +1,16 @@
+.multi-select{
+    position: relative;
+}
+
+.menu-show{
+    visibility: visible;
+    position: absolute;
+    top: 2rem;
+        background-color: white;
+        z-index: 20;
+}
+
+.menu-hide{
+    visibility: hidden;
+    position: absolute;
+}

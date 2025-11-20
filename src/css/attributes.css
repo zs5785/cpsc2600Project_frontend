@@ -1,0 +1,31 @@
+.attr-list-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.attr-container{
+    display: grid;
+    grid-template-columns: 1fr max-content max-content;
+    gap: 0.5rem;
+}
+
+.attr-container>div{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.attr-container input{
+    width: 50px;
+}
+
+.add-btn{
+    font-size: 1.5rem;
+}
+
+.sub-btn{
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-self: center;
+}

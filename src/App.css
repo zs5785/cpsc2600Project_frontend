@@ -1,0 +1,207 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.noselect{
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.spinner{
+  margin-top: 5rem;
+  font-size: 10rem;
+  animation: App-logo-spin infinite 0.75s steps(9, jump-none);
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+footer{
+  margin: 3rem;
+  text-align: center;
+}
+
+a:visited{
+  color: inherit;
+}
+
+main{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: max-content;
+}
+
+header{
+  position: sticky;
+  top: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  z-index: 100;
+}
+
+body{
+  background-color: var(--background-col);
+  color: var(--foreground-col);
+}
+
+nav{
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+}
+
+ul{
+  list-style: none;
+}
+
+nav ul{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: larger;
+}
+
+.container{
+  background-color: var(--foreground-col);
+  color: var(--text-col);
+}
+
+.list{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.list-single{
+  grid-template-columns: 1fr;
+}
+
+.list-double{
+  grid-template-columns: 1fr 1fr;
+}
+
+.list-triple{
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.list-btn{
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  justify-content: right;
+  gap: 0.5rem;
+  align-content: end;
+  margin-bottom: 0.5rem;
+  position: sticky;
+  top: 6rem;
+  margin-top: -43px;
+  z-index: 10;
+}
+
+.list-btn button{
+  font-size: 1.5rem;
+}
+
+input, button, select{
+  border: black solid 2px;
+  border-radius: 0;
+  box-sizing: border-box;
+  background-color: var(--btn-col);
+}
+
+.clickable, .clickable:active{
+  background-color: var(--btn-col);
+  color: var(--text-col);
+  cursor: pointer;
+}
+
+.clickable:hover{
+  background-color: var(--btn-hover-col);
+  color: var(--text-neg-col);
+  cursor: pointer;
+}
+
+.logout-btn{
+  cursor: pointer;
+}
+
+.mid-font{
+  font-size: 1.5rem;
+}
+
+.big-font{
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.gap{
+  height: 1rem;
+}
+
+.form-container{
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    width: 400px;
+}
+
+.form-container{
+    font-size: 1.5rem;
+}
+
+.form-container input, .form-container select{
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+input[type=submit]{
+    font-size: 2rem;
+}
+
+.error-container{
+    margin-top: 1rem;
+    background-color: red;
+    color: white;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

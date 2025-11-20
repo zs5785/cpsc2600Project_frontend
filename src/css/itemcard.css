@@ -1,0 +1,74 @@
+.item-card{
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: max-content 1fr;
+  padding: 0.5rem;
+  position: relative;
+  gap: 0.5rem;
+}
+
+.item-card>img{
+  width: 100%;
+}
+
+.item-card h2{
+  margin: 0;
+}
+
+.detail{
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+}
+
+.round-box{
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  padding-bottom: 0.2rem;
+}
+
+.stats{
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.item-head{
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  gap: 0.5rem;
+  grid-column: 1/-1;
+  padding-bottom: 0.5rem;
+  border-bottom: black solid 2px;
+}
+
+.item-type{
+  font-size: 2rem;
+}
+
+.price{
+  font-size: 2rem;
+  text-align: end;
+}
+
+.common{
+  background-color: #353535;
+  color: white;
+}
+
+.rare{
+  background-color: #1054e6;
+  color: white;
+}
+
+.epic{
+  background-color: #a424e8;
+  color: white;
+}
+
+.legendary{
+  background-color: #ff1e00;
+  color: white;
+}
