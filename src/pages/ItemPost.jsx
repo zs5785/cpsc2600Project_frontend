@@ -123,6 +123,7 @@ function ItemPost(props){
                         value={item._id} 
                         optionValue={(ele)=>ele._id}
                         optionLabel={(ele)=>ele.itemname} 
+                        required
                     />
                 </label>
                 <label>Rarity
@@ -131,6 +132,7 @@ function ItemPost(props){
                         options={datas.rarities} 
                         onChange={handleRarityChange} 
                         value={rarity} 
+                        required
                     />
                 </label>
                 <label>Mods</label>

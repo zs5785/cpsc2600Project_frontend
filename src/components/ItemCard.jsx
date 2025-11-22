@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import '../css/itemcard.css';
 
 function ItemCard(props){
-    const {item} = props;
+    const {item, newItem} = props;
     const baseItem = item.item[0];
 
     let typeIconMap = "fa-flask";
@@ -28,6 +28,9 @@ function ItemCard(props){
             <div className='detail'>
                 <div className='stats'>{baseItem.stats.map((ele)=>{return (<Stat key={nanoid()} attr={ele} />)})}</div>
                 <div className='mods'>{item.mods.map((ele)=>{return (<Mod key={nanoid()}  attr={ele} />)})}</div>
+            </div>
+            <div className='footer'>
+                <b>From {item.user[0].username}</b>
                 <div className='price'><b>{'$'+item.price}</b></div>
             </div>
         </div>

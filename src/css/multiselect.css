@@ -1,13 +1,33 @@
 .multi-select{
     position: relative;
+    width: max-content;
+}
+
+.multi-select button{
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    text-align: left;
+    align-items: center;
 }
 
 .menu-show{
     visibility: visible;
     position: absolute;
-    top: 2rem;
-        background-color: white;
-        z-index: 20;
+    bottom: max-content;
+    background-color: var(--btn-col);
+    z-index: 20;
+    border: var(--text-col) solid 2px;
+    border-top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    max-height: 300px;
+    overflow: scroll;
+}
+
+.menu-show div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .menu-hide{

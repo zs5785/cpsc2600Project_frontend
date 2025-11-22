@@ -109,7 +109,7 @@ function AddItem(){
                         />
                 </label>
                 <label>Type
-                    <DropDown elementID='item-type' options={datas.types} onChange={handleTypeChange} value={item.itemType}/>
+                    <DropDown elementID='item-type' options={datas.types} onChange={handleTypeChange} value={item.itemType} required/>
                 </label>
                 <label>Icon path
                         <input 

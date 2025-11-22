@@ -20,14 +20,39 @@ function AttributeInput(props){
         onChange({...selected, val2: e.target.value});
     }
 
+    const val1Placeholder = single ? "Value" : "Min";
+    const val2Placeholder = "Max";
+
     return (
         <div className="attr-container">
-            <DropDown elementID={elementID} options={options} onChange={handleOptionChanged} value={selectedName} defaultNull />
+            <DropDown 
+                elementID={elementID} 
+                options={options} 
+                onChange={handleOptionChanged} 
+                value={selectedName} 
+                nullLabel='---Select Mod---'
+                defaultNull 
+                required 
+            />
             <div>
-                <input key={1} onChange={handleVal1Changed} id={elementID+"-v1"} value={val1} required={required}/>
-                {!single && <input key={2} onChange={handleVal2Changed} id={elementID+"-v2"} value={val2} required={required}/>}
+                <input 
+                    key={1} 
+                    onChange={handleVal1Changed} 
+                    id={elementID+"-v1"} 
+                    value={val1} 
+                    required={single && required}
+                    placeholder={val1Placeholder}
+                />
+                {!single && 
+                <input 
+                    key={2} 
+                    onChange={handleVal2Changed} 
+                    id={elementID+"-v2"} 
+                    value={val2} 
+                    placeholder={val2Placeholder}
+                />}
             </div>
-            <button type="button" className="clickable sub-btn"  onClick={onRemove}><i className="fa-solid fa-minus"></i></button>
+            <div className="clickable sub-btn"  onClick={onRemove}><i className="fa-solid fa-minus"></i></div>
         </div>
     );
 }

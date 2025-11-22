@@ -28,4 +28,7 @@
     width: 1.5rem;
     height: 1.5rem;
     align-self: center;
+    justify-content: center;
+    align-items: center;
+    border: var(--text-col) solid 2px;
 }

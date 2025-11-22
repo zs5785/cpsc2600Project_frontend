@@ -97,41 +97,6 @@ nav ul{
   color: var(--text-col);
 }
 
-.list{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.list-single{
-  grid-template-columns: 1fr;
-}
-
-.list-double{
-  grid-template-columns: 1fr 1fr;
-}
-
-.list-triple{
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.list-btn{
-  display: grid;
-  grid-template-columns: repeat(4, max-content);
-  justify-content: right;
-  gap: 0.5rem;
-  align-content: end;
-  margin-bottom: 0.5rem;
-  position: sticky;
-  top: 6rem;
-  margin-top: -43px;
-  z-index: 10;
-}
-
-.list-btn button{
-  font-size: 1.5rem;
-}
-
 input, button, select{
   border: black solid 2px;
   border-radius: 0;

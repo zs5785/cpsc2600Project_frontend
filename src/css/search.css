@@ -1,0 +1,117 @@
+.search-container{
+  max-width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-container form{
+  padding: 1rem;
+  font-size: 1rem;
+  z-index: -1;
+}
+
+.search-container input, .search-container button, .search-container select{
+    font-size: 1rem;
+}
+
+.search-filters{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.search-filters>div{
+    width: 100%;
+}
+
+.search-filters button{
+    width: 100%;
+}
+
+.search-price{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.search-price>div{
+    display: flex;
+    flex-direction: column;
+}
+
+.search-actions{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr max-content max-content;
+    gap: 0.5rem;
+}
+
+.search-actions select{
+    margin-left: 0.5rem;
+}
+
+.search-result{
+    max-width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.list{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.list-single{
+  grid-template-columns: 1fr;
+}
+
+.list-double{
+  grid-template-columns: 1fr 1fr;
+}
+
+.list-triple{
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.list-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  gap: 0.5rem;
+  align-content: end;
+  margin-bottom: 0.5rem;
+  position: sticky;
+  top: 6rem;
+  margin-top: -43px;
+  z-index: 10;
+}
+
+.list-btn button{
+  font-size: 1.5rem;
+}
+
+.search-container>button{
+  width: 100%;
+  border: 0;
+  border-top: var(--text-col) solid 2px;
+}
+
+.hide-search>form{
+  transform: translateY(-100%);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.search-heading{
+  position: relative;
+  z-index: 1;
+}
+
+.hide-search>button{
+  border: 0;
+  width: 100%;
+}

@@ -17,7 +17,17 @@
 
 .detail{
   display: grid;
-  grid-template-rows: max-content 1fr max-content;
+  grid-template-rows: max-content 1fr;
+}
+
+.footer{
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-column: 1/-1;
+}
+
+.footer>*{
+  align-content: center;
 }
 
 .round-box{
