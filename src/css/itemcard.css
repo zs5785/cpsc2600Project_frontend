@@ -5,6 +5,28 @@
   padding: 0.5rem;
   position: relative;
   gap: 0.5rem;
+  width: 450px;
+}
+
+.item-action{
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.item-action button{
+  font-size: 1.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+}
+
+.hidden{
+  visibility: collapse;
 }
 
 .item-card>img{
@@ -61,6 +83,14 @@
 .price{
   font-size: 2rem;
   text-align: end;
+}
+
+.dif{
+  border: red dashed 10px;
+}
+
+.red-heart{
+  color: red;
 }
 
 .common{

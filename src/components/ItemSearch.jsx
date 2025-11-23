@@ -6,13 +6,15 @@ import axios from "axios";
 import ItemList from "./ItemList";
 import AttributeList from "./AttributeList";
 import { useSearchParams } from 'react-router-dom';
+import { useFavItems } from '../contexts/FavouriteProvider';
 
 function ItemSearch(props){
     const listTypeLocID = 'ListType';
 
+    const fav = useFavItems();
     const [searchParams, setSearchParams] = useSearchParams();
     
-    const {searchHeading} = props;
+    const {searchFav} = props;
 
     const [datas, setDatas] = useState({loading: true, items: [], rarities: [], itemTypes: [], mods: []});
     
@@ -34,6 +36,8 @@ function ItemSearch(props){
     const printError = (error)=>console.error(error);
 
     useEffect(()=>{
+        search();
+
         axios.get(import.meta.env.VITE_SERVER_URL + "/item/attr")
             .then((response)=>{
                 let updatedData = {...datas};
@@ -46,8 +50,6 @@ function ItemSearch(props){
                         updatedData.items = response.data;
                         updatedData.loading = false;
                         setDatas(updatedData);
-
-                        search();
                     })
                     .catch(printError);
             })
@@ -62,10 +64,15 @@ function ItemSearch(props){
     function search(){
         const sortField = (sortType === 'Newest' || sortType === 'Oldest') ? 'listDate' : 'price';
         const sortOrder = (sortType === 'Newest' || sortType === 'Priciest') ? -1 : 1;
+
+        if (searchFav && fav.favItems.length <= 0){
+            setList({loading: false, items: []});
+            return;
+        }
         
         const params = {
-            sortField: sortField,
-            sortOrder: sortOrder,
+            sort: sortField,
+            order: sortOrder,
             items: JSON.stringify(searchItem),
             types: JSON.stringify(typesFilter),
             rarities: JSON.stringify(raritiesFilter),
@@ -73,6 +80,7 @@ function ItemSearch(props){
             maxPrice: priceFilter.max,
             mods: JSON.stringify(modFilters),
             sellerName: sellerName,
+            ids: searchFav ? JSON.stringify(fav.favItems.map((ele)=>ele._id)) : "",
         };
 
         axios.get(import.meta.env.VITE_SERVER_URL + "/item/query", {params: params})
@@ -107,6 +115,21 @@ function ItemSearch(props){
         setList({loading: true, items: []});
 
         search();
+    }
+
+    function handleToggleFav(item, isFaved){
+        if (isFaved)
+            fav.add(item);
+        else{
+            fav.remove(item);
+            if (searchFav){
+                handleDeletedPost(item._id);
+            }
+        }
+    }
+
+    function handleDeletedPost(postID){
+        setList({loading: false, items: list.items.filter((ele)=>ele._id!==postID)});
     }
 
     return (
@@ -193,7 +216,7 @@ function ItemSearch(props){
                 </button>
             </div>
             <div className='search-result' id='search-result'>
-                {!list.loading && <h2>{list.items.length > 0 ? searchHeading : "No Match"}</h2>}
+                {!list.loading && <h2>{list.items.length > 0 ? "Result" : "No Match"}</h2>}
                 {!list.loading && list.items.length > 0 && 
                     <div className='list-btn'>
                         <button className='clickable' onClick={()=>updateListType(0)}><i className="fa-solid fa-list"></i></button>
@@ -201,7 +224,14 @@ function ItemSearch(props){
                         <button className='clickable' onClick={()=>updateListType(2)}><i className="fa-solid fa-table-cells"></i></button>
                     </div>
                 }
-                <ItemList loading={list.loading} items={list.items} listType={listType} />
+                <ItemList 
+                    loading={list.loading} 
+                    items={list.items} 
+                    listType={listType} 
+                    oldItems={searchFav && fav.favItems}
+                    onToggleFav={handleToggleFav}
+                    onDelete={handleDeletedPost}
+                />
             </div>
         </div>
     );

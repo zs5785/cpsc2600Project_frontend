@@ -18,7 +18,7 @@ function NavBar(){
             <Link reloadDocument to="/"><h1>TCenter</h1></Link>
             <ul>
                 <li><Link reloadDocument to='/'>Home</Link></li>
-                <li><Link to='/'>Favourites</Link></li>
+                <li><Link to='/fav'>Favourites</Link></li>
             </ul>
 
             <ul>

@@ -9,24 +9,29 @@ import AuthProvider from './contexts/AuthProvider';
 import AddItem from './pages/Admin/AddItem';
 import { nanoid } from 'nanoid';
 import ItemPost from './pages/ItemPost';
+import FavouriteProvider from './contexts/FavouriteProvider';
+import Favourites from './pages/Favourites';
 
 function App() {
   return (
     <>
       <AuthProvider>
-        <header className='container'>
-          <NavBar />
-        </header>
-        <main>
-            <Routes>
-                <Route path='/' Component={Home} />
-                <Route path='/signup' element={<Userauth isSignup={true} key={nanoid()} />} />
-                <Route path='/login' element={<Userauth key={nanoid()} />} />
-                <Route path='/additem' Component={AddItem} />
-                <Route path='/post' Component={ItemPost}/>
-                <Route Component={Unknow} />
-            </Routes>
-        </main>
+        <FavouriteProvider>
+          <header className='container'>
+            <NavBar />
+          </header>
+          <main>
+              <Routes>
+                  <Route path='/' Component={Home} />
+                  <Route path='/signup' element={<Userauth isSignup={true} key={nanoid()} />} />
+                  <Route path='/login' element={<Userauth key={nanoid()} />} />
+                  <Route path='/additem' Component={AddItem} />
+                  <Route path='/post' Component={ItemPost}/>
+                  <Route path='/fav' Component={Favourites}/>
+                  <Route Component={Unknow} />
+              </Routes>
+          </main>
+        </FavouriteProvider>
       </AuthProvider>
       <footer>
         <div>By Tong Yu Hei</div>

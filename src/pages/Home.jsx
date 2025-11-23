@@ -3,7 +3,8 @@ import ItemSearch from '../components/ItemSearch';
 function Home(){
     return (
         <div>
-            <ItemSearch searchHeading="Result"/>
+            <h1>Home</h1>
+            <ItemSearch />
         </div>
     );
 }
