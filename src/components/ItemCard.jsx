@@ -2,10 +2,15 @@ import Mod from './Mod';
 import Stat from './Stat';
 import { nanoid } from 'nanoid';
 import '../css/itemcard.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ItemCard(props){
+    const navigate = useNavigate();
+
     const {item, newItem} = props;
     const baseItem = item.item[0];
+    
+    const sellerName = item.user[0].username;
 
     let typeIconMap = "fa-flask";
     switch(baseItem.type){
@@ -30,7 +35,7 @@ function ItemCard(props){
                 <div className='mods'>{item.mods.map((ele)=>{return (<Mod key={nanoid()}  attr={ele} />)})}</div>
             </div>
             <div className='footer'>
-                <b>From {item.user[0].username}</b>
+                <Link reloadDocument to={'/?filter='+JSON.stringify({seller: sellerName})}>From {sellerName}</Link>
                 <div className='price'><b>{'$'+item.price}</b></div>
             </div>
         </div>

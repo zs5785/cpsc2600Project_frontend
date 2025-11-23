@@ -5,22 +5,28 @@ import MultiSelect from "./MultiSelect";
 import axios from "axios";
 import ItemList from "./ItemList";
 import AttributeList from "./AttributeList";
+import { useSearchParams } from 'react-router-dom';
 
 function ItemSearch(props){
     const listTypeLocID = 'ListType';
 
-    const {sellerName} = props;
+    const [searchParams, setSearchParams] = useSearchParams();
+    
+    const {searchHeading} = props;
 
     const [datas, setDatas] = useState({loading: true, items: [], rarities: [], itemTypes: [], mods: []});
     
     const [list, setList] = useState({loading: true, items: []});
+
+    const searchParamObj = searchParams.get('filter') ? JSON.parse(searchParams.get('filter')) : {};
     
-    const [searchItem, setSearchItem] = useState([]);
-    const [typesFilter, setTypesFilter] = useState([]);
-    const [raritiesFilter, setRaritiesFilter] = useState([]);
-    const [modFilters, setModFilters] = useState([]);
-    const [priceFilter, setPriceFilter] = useState({min: "", max: ""});
-    const [sortType, setSortType] = useState("Newest");
+    const [searchItem, setSearchItem] = useState(searchParamObj.items ? searchParamObj.items : []);
+    const [typesFilter, setTypesFilter] = useState(searchParamObj.types ? searchParamObj.types : []);
+    const [raritiesFilter, setRaritiesFilter] = useState(searchParamObj.rarities ? searchParamObj.rarities : []);
+    const [modFilters, setModFilters] = useState(searchParamObj.mods ? searchParamObj.mods : []);
+    const [priceFilter, setPriceFilter] = useState({min: searchParamObj.minPrice, max: searchParamObj.maxPrice});
+    const [sellerName, setSellerName] = useState(searchParamObj.seller);
+    const [sortType, setSortType] = useState(searchParamObj.sort ? searchParamObj.sort : "Newest");
 
     const [toggleSearch, setToggleSearch] = useState(true);
     const [listType, setListType] = useState(localStorage.getItem(listTypeLocID) || 0);
@@ -82,13 +88,39 @@ function ItemSearch(props){
         setRaritiesFilter([]);
         setModFilters([]);
         setPriceFilter({min: "", max: ""});
+        setSellerName("");
+    }
+
+    function handleSearchClicked(e){
+        e.preventDefault();
+        setSearchParams({filter: JSON.stringify({
+            items: searchItem,
+            types: typesFilter,
+            rarities: raritiesFilter,
+            mods: modFilters,
+            minPrice: priceFilter.min,
+            maxPrice: priceFilter.max,
+            seller: sellerName,
+            sort: sortType 
+        })});
+
+        setList({loading: true, items: []});
+
+        search();
     }
 
     return (
         <div>
             <div className={(toggleSearch?"search-container":"search-container hide-search")}>
                 <h2 className='search-heading'>Search</h2>
-                <form className="container" onSubmit={(e)=>{e.preventDefault(); search();}}>
+                <form className="container" onSubmit={handleSearchClicked}>
+                    <label>Seller</label>
+                    <input
+                        name='seller'
+                        id='seller'
+                        onChange={(e)=>setSellerName(e.target.value)}
+                        value={sellerName}
+                    />
                     <label>Filters</label>
                     <div className="search-filters">
                         <MultiSelect 
@@ -161,7 +193,7 @@ function ItemSearch(props){
                 </button>
             </div>
             <div className='search-result' id='search-result'>
-                {!list.loading && <h2>{list.items.length > 0 ? "Result" : "No Match"}</h2>}
+                {!list.loading && <h2>{list.items.length > 0 ? searchHeading : "No Match"}</h2>}
                 {!list.loading && list.items.length > 0 && 
                     <div className='list-btn'>
                         <button className='clickable' onClick={()=>updateListType(0)}><i className="fa-solid fa-list"></i></button>

@@ -15,17 +15,17 @@ function NavBar(){
 
     return (
         <nav>
-            <Link to="/"><h1>TCenter</h1></Link>
+            <Link reloadDocument to="/"><h1>TCenter</h1></Link>
             <ul>
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/user'>Profile</Link></li>
+                <li><Link reloadDocument to='/'>Home</Link></li>
                 <li><Link to='/'>Favourites</Link></li>
             </ul>
 
             <ul>
+                {!!auth.user && <li><Link reloadDocument to={'/?filter='+JSON.stringify({seller: auth.user})}>Profile</Link></li>}
                 {!!auth.user && <li><Link to='/post'>Post</Link></li>}
                 {!!auth.user && <li className='logout-btn' onClick={logout}>Logout</li>}
-                {!!auth.user && auth.user}
+                {!!auth.user && <li>{auth.user}</li>}
 
                 {!auth.user && <li><Link to='/login'>Login</Link></li>}
                 {!auth.user && <li><Link to='/signup'>Sign Up</Link></li>}
