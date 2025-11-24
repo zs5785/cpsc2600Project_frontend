@@ -6,7 +6,10 @@ function Favourites(){
 
     return (
         <div>
-            <h1>Favourites</h1>
+            <div className="fav-heading">
+                <h1>Favourites</h1>
+                <button className="clickable" onClick={()=>fav.clear()}>Clear All</button>
+            </div>
             <ItemSearch searchFav />
         </div>
     );

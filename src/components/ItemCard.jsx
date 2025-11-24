@@ -38,8 +38,8 @@ function ItemCard(props){
 
     return (
         <div className={'container item-card ' + (isDif() ? "dif" : "")} 
-             onMouseEnter={onMouseEnter} 
-             onMouseLeave={()=>setShowAction(false)}
+             onMouseOver={onMouseEnter} 
+             onMouseOut={()=>setShowAction(false)}
         >
             <ItemAction hidden={!showAction} item={item} onToggleFav={onToggleFav} onDelete={onDelete} />
             <div className='item-head'>

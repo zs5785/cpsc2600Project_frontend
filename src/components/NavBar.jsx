@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthProvider';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 function NavBar(){
     const auth = useAuth();
     const navigate = useNavigate();
+
+    const [username, setUsername] = useState(auth.user);
+
+    useEffect(()=>{
+        setUsername(auth.user);
+    }, [auth])
 
     function logout(){
         auth.updateUser(null);
@@ -22,13 +29,13 @@ function NavBar(){
             </ul>
 
             <ul>
-                {!!auth.user && <li><Link reloadDocument to={'/?filter='+JSON.stringify({seller: auth.user})}>Profile</Link></li>}
-                {!!auth.user && <li><Link to='/post'>Post</Link></li>}
-                {!!auth.user && <li className='logout-btn' onClick={logout}>Logout</li>}
-                {!!auth.user && <li>{auth.user}</li>}
+                {!!username && <li><Link reloadDocument to={'/?filter='+JSON.stringify({seller: username})}>My Posts</Link></li>}
+                {!!username && <li><Link to='/post'>Post</Link></li>}
+                {!!username && <li className='logout-btn' onClick={logout}>Logout</li>}
+                {!!username && <li>{username}</li>}
 
-                {!auth.user && <li><Link to='/login'>Login</Link></li>}
-                {!auth.user && <li><Link to='/signup'>Sign Up</Link></li>}
+                {!username && <li><Link to='/login'>Login</Link></li>}
+                {!username && <li><Link to='/signup'>Sign Up</Link></li>}
             </ul>
         </nav>
     );

@@ -5,5 +5,6 @@ html{
     --text-neg-col: #EEEEEE;
     --btn-col: #EEEEEE;
     --btn-hover-col: #393E46;
-
+    --error-col: #ff1010;
+    --good-col: #3aff6c;
 }

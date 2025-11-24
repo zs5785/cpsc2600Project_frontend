@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 
 const FavouritesContext = createContext();
@@ -16,7 +17,20 @@ function FavouriteProvider({children}){
     const [favItems, setFavItems] = useState(getFavItemsFromLoc());
 
     useEffect(()=>{
-        //TODO check and remove deleted favourites
+        const items = getFavItemsFromLoc();
+        const idList = items.map((ele)=>ele._id);
+
+        const params = {
+            ids: JSON.stringify(idList)
+        };
+        axios.get(import.meta.env.VITE_SERVER_URL + "/item/query", {params: params})
+            .then((response)=>{
+                const foundList = response.data;
+                const updatedList = items.filter((ele)=>foundList.find((subEle)=>subEle._id===ele._id));
+                setFavItems(updatedList);
+                localStorage.setItem(favItemsLocID, JSON.stringify(updatedList));
+            })
+            .catch((err)=>console.error(err));
     }, []);
 
     function containsItem(item){

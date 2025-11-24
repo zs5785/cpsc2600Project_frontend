@@ -1,4 +1,5 @@
-import { useContext, createContext, useState } from "react";
+import axios from "axios";
+import { useContext, createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -22,6 +23,20 @@ function AuthProvider({children}){
         else
             localStorage.removeItem(tokenLocID);
     };
+
+    useEffect(()=>{
+        if (token){
+            axios.get(`${import.meta.env.VITE_SERVER_URL}/user/${token}`)
+                .then((response)=>{
+                    console.log(response);
+                })
+                .catch((err)=>{
+                    console.error(err);
+                    updateUser("");
+                    updateToken("");
+                });
+        }
+    }, [])
 
     return (
         <AuthContext.Provider value={{user, token, updateUser, updateToken}}>

@@ -38,23 +38,25 @@ function ItemSearch(props){
     useEffect(()=>{
         search();
 
-        axios.get(import.meta.env.VITE_SERVER_URL + "/item/attr")
-            .then((response)=>{
-                let updatedData = {...datas};
-                updatedData.mods = response.data.mods;
-                updatedData.rarities = response.data.rarity;
-                updatedData.itemTypes = response.data.types;
+        if (datas.loading){
+            axios.get(import.meta.env.VITE_SERVER_URL + "/item/attr")
+                .then((response)=>{
+                    let updatedData = {...datas};
+                    updatedData.mods = response.data.mods;
+                    updatedData.rarities = response.data.rarity;
+                    updatedData.itemTypes = response.data.types;
 
-                axios.get(import.meta.env.VITE_SERVER_URL + "/item/base")
-                    .then((response)=>{
-                        updatedData.items = response.data;
-                        updatedData.loading = false;
-                        setDatas(updatedData);
-                    })
-                    .catch(printError);
-            })
-            .catch(printError);
-    }, []);
+                    axios.get(import.meta.env.VITE_SERVER_URL + "/item/base")
+                        .then((response)=>{
+                            updatedData.items = response.data;
+                            updatedData.loading = false;
+                            setDatas(updatedData);
+                        })
+                        .catch(printError);
+                })
+                .catch(printError);
+        }
+    }, (searchFav ? [fav] : []));
 
     function updateListType(newListType){
         setListType(newListType);
@@ -101,6 +103,7 @@ function ItemSearch(props){
 
     function handleSearchClicked(e){
         e.preventDefault();
+        
         setSearchParams({filter: JSON.stringify({
             items: searchItem,
             types: typesFilter,

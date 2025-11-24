@@ -162,6 +162,17 @@ input[type=submit]{
     font-size: 2rem;
 }
 
+.fav-heading{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.fav-heading>button{
+  font-size: 1.5rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

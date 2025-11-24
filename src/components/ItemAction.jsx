@@ -12,9 +12,14 @@ function ItemAction(props){
     const {hidden, item, onToggleFav, onDelete} = props;
 
     const sellerName = item.user[0].username;
-    const isOwner = sellerName === auth.user;
 
+    const [isOwner, setIsOwner] = useState(sellerName === auth.user);
     const [faved, setFaved] = useState(fav.containsItem(item));
+
+    useEffect(()=>{
+        setIsOwner(sellerName === auth.user);
+        setFaved(fav.containsItem(item));
+    }, [auth, fav])
 
     function onCopy(){
         let message = 'Hi ' + sellerName + ' I would like to trade ' +
@@ -41,21 +46,20 @@ function ItemAction(props){
     }
 
     function onDeletePost(){
-        const params = {
+        const payload = {
             id: item._id,
             token: auth.token
         };
 
-        axios.delete(import.meta.env.VITE_SERVER_URL + '/item', {params: params})
+        const data = JSON.stringify(payload);
+
+        axios.delete(`${import.meta.env.VITE_SERVER_URL}/item/delete/${data}`)
             .then((response)=>{
+                console.log(response.data.message);
                 onDelete(item._id);
             })
             .catch((err)=>console.error(err));
     }
-
-    // useEffect(()=>{
-    //     setFaved(fav.containsItem(item));
-    // },[fav]);
 
     return (
         <div className={"item-action " + (hidden ? " hidden" : "")}>
