@@ -14,8 +14,7 @@ function NavBar(){
     }, [auth])
 
     function logout(){
-        auth.updateUser(null);
-        auth.updateToken(null);
+        auth.logout();
 
         navigate('/');
     }

@@ -11,7 +11,6 @@ function ItemCard(props){
     
     const sellerName = item.user[0].username;
 
-    const [oldItem, setOldItem] = useState(pastItem);
     const [showAction, setShowAction] = useState(false);
 
     let typeIconMap = "fa-flask";
@@ -25,19 +24,22 @@ function ItemCard(props){
     }
 
     function isDif(){
-        return oldItem && Object.is(item, oldItem);
+        if (!pastItem){
+            return false;
+        }
+        
+        return JSON.stringify(pastItem) !== JSON.stringify(item);
     }
 
     function onMouseEnter(){
         if (isDif()){
-            setOldItem(item);
             onToggleFav(item, true);
         }
         setShowAction(true);
     }
 
     return (
-        <div className={'container item-card ' + (isDif() ? "dif" : "")} 
+        <div className='container item-card'
              onMouseOver={onMouseEnter} 
              onMouseOut={()=>setShowAction(false)}
         >
@@ -58,6 +60,7 @@ function ItemCard(props){
                 </Link>
                 <div className='price'><b>{'$'+item.price}</b></div>
             </div>
+            {isDif() && <div className='dif'></div>}
         </div>
     );
 }

@@ -4,25 +4,43 @@ import { useContext, createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 function AuthProvider({children}){
-    const userLocID = 'username';
-    const tokenLocID = 'token';
+    const sessionLocID = 'session';
 
-    const [user, setUser] = useState(localStorage.getItem(userLocID) || "");
-    const [token, setToken] = useState(localStorage.getItem(tokenLocID) || "");
-    const updateUser = (newUser)=>{
-        setUser(newUser);
-        if (newUser)
-            localStorage.setItem(userLocID, newUser);
+    function getSessionLocData(field){
+        const data = localStorage.getItem(sessionLocID);
+        if (data){
+            return JSON.parse(data)[field];
+        }
         else
-            localStorage.removeItem(userLocID);
-    };
-    const updateToken = (newToken)=>{
-        setToken(newToken);
-        if (newToken)
-            localStorage.setItem(tokenLocID, newToken);
+            return undefined;
+    }
+
+    const [user, setUser] = useState(getSessionLocData('username') || "");
+    const [token, setToken] = useState(getSessionLocData('token') || "");
+    const [role, setRole] = useState(getSessionLocData('role') || "");
+
+    const isAdmin = ()=>{
+        return role === 'admin';
+    }
+
+    const login = (sessionData)=>{
+        if (sessionData){
+            setUser(sessionData.username);
+            setToken(sessionData.token);
+            setRole(sessionData.role);
+            localStorage.setItem(sessionLocID, JSON.stringify(sessionData));
+        }
         else
-            localStorage.removeItem(tokenLocID);
-    };
+            localStorage.removeItem(sessionLocID);
+    }
+
+    const logout = ()=>{
+        setUser("");
+        setToken("");
+        setRole("");
+        localStorage.removeItem(sessionLocID);
+    }
+
 
     useEffect(()=>{
         if (token){
@@ -32,14 +50,13 @@ function AuthProvider({children}){
                 })
                 .catch((err)=>{
                     console.error(err);
-                    updateUser("");
-                    updateToken("");
+                    logout();
                 });
         }
-    }, [])
+    }, []);
 
     return (
-        <AuthContext.Provider value={{user, token, updateUser, updateToken}}>
+        <AuthContext.Provider value={{user, token, isAdmin, login, logout}}>
             {children}
         </AuthContext.Provider>
     );

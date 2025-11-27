@@ -86,7 +86,16 @@
 }
 
 .dif{
-  border: red dashed 10px;
+  border: red solid 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  animation-name: flashing;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 
 .red-heart{
@@ -111,4 +120,16 @@
 .legendary{
   background-color: #ff1e00;
   color: white;
+}
+
+@keyframes flashing {
+  0%{
+    border: red solid 2px;
+  }
+  50%{
+    border: red solid 10px;
+  }
+  100%{
+    border: red solid 2px;
+  }
 }

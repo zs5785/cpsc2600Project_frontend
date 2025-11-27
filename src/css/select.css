@@ -1,9 +1,9 @@
-.multi-select{
+.dropdown{
     position: relative;
     width: max-content;
 }
 
-.multi-select button{
+.dropdown button{
     display: grid;
     grid-template-columns: 1fr max-content;
     text-align: left;

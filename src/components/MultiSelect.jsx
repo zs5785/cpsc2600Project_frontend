@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import '../css/multiselect.css';
+import '../css/select.css';
 import { useEffect, useRef, useState } from "react";
 
 function CheckBox(props){
@@ -36,7 +36,7 @@ function MultiSelect(props){
     }
     
     return (
-        <div className='multi-select' onMouseLeave={()=>setToggle(false)}>
+        <div className='dropdown' onMouseLeave={()=>setToggle(false)}>
             <button className="clickable" type="button" onClick={onMenuClicked}>{label}<i className="fa-solid fa-angle-down"></i></button>
             <div className={toggle ? "menu-show" : "menu-hide"}>
                 <CheckBox 

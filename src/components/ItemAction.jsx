@@ -17,7 +17,7 @@ function ItemAction(props){
     const [faved, setFaved] = useState(fav.containsItem(item));
 
     useEffect(()=>{
-        setIsOwner(sellerName === auth.user);
+        setIsOwner(sellerName === auth.user || auth.isAdmin());
         setFaved(fav.containsItem(item));
     }, [auth, fav])
 

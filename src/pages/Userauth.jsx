@@ -46,8 +46,7 @@ function Userauth(props){
 
         const startSession = (response)=>{
             if (response.data){
-                auth.updateUser(response.data.username);
-                auth.updateToken(response.data.token);
+                auth.login(response.data);
                 navigate('/');
                 return;
             }
